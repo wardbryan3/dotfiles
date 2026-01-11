@@ -18,6 +18,7 @@ krohnkiteEnabled=true
 loginEnabled=false
 logoutEnabled=false
 maximizeEnabled=false
+rememberwindowpositionsEnabled=true
 scaleEnabled=false
 slideEnabled=false
 slidingpopupsEnabled=false
@@ -47,6 +48,15 @@ stairLayoutOrder=0
 
 [Tiling]
 padding=4
+
+[Tiling][010773f5-f6ee-4e22-8a43-03f653f3bd81][]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][010773f5-f6ee-4e22-8a43-03f653f3bd81][11f87892-4b00-4990-963f-725b0c29ac6e]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][010773f5-f6ee-4e22-8a43-03f653f3bd81][39ff2c1d-56f2-4c9d-86f9-2af4ab45d785]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][010773f5-f6ee-4e22-8a43-03f653f3bd81][e3ad4271-0ad3-4864-964f-ef0dcf7da0fd]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
