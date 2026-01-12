@@ -20,27 +20,13 @@ echo ""
 echo "2. Shell aliases..."
 ln -sf "$PWD/aliases" "$HOME/.config/aliases" && echo "  ✓ Aliases linked"
 
-# 3. KDE DESKTOP CONFIG
-# KDE is a graphical desktop environment for Linux
-echo ""
-echo "3. KDE desktop settings..."
-ln -sf "$PWD/kdeglobals" "$HOME/.config/kdeglobals" && echo "  ✓ KDE globals linked"
-ln -sf "$PWD/kglobalshortcutsrc" "$HOME/.config/kglobalshortcutsrc" && echo "  ✓ KDE shortcuts linked"
-ln -sf "$PWD/kwinrc" "$HOME/.config/kwinrc" && echo "  ✓ KWin settings linked"
 
-# 4. KWIN TILING SCRIPT
-# Krohnkite automatically arranges windows in tiles
-echo ""
-echo "4. Window tiling script (Krohnkite)..."
-mkdir -p "$HOME/.local/share/kwin/scripts"  # Create directory if needed
-ln -sf "$PWD/krohnkite" "$HOME/.local/share/kwin/scripts/krohnkite" && echo "  ✓ Krohnkite linked"
-
-# 5. COLOR SCHEME
+# 4. COLOR SCHEME
 # Controls colors for windows, buttons, text, etc.
 echo ""
 echo "5. Color scheme..."
 mkdir -p "$HOME/.local/share/color-schemes"  # Create directory if needed
-ln -sf "$PWD/IridescentLightly2Custom.colors" "$HOME/.local/share/color-schemes/IridescentLightly2Custom.colors" && echo "  ✓ Color scheme linked"
+ln -sf "$PWD/Purple_White.colors" "$HOME/.local/share/color-schemes/Purple_White.colors" && echo "  ✓ Color scheme linked"
 
 echo ""
 echo "=== All symlinks created successfully! ==="

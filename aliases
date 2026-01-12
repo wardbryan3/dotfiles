@@ -6,7 +6,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias home="cd ~"
-alias dot="~/.config"
+alias dot="cd ~/.config"
 
 #LISTING FILES
 alias lsize="eza -al --sort=size"
