@@ -33,8 +33,14 @@ readonly FONT_PACKAGES=(
   ttf-jetbrains-mono
 )
 
+readonly KWIN_SCRIPTS=(
+  "khronkite|https://github.com/esjeon/khronkite"
+  "rememberwindowpositions|https://github.com/rxappdev/RememberWindowPositions"
+)
+
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly CONFIG_SCRIPT="${SCRIPT_DIR}/link-configs.sh"
+readonly TEMP_DIR="/tmp/system-setup-$(date +%s)"
 
 # Helper Functions
 print_info() {
@@ -138,6 +144,57 @@ install_packages() {
 }
 
 # KWIN Sctipt Installation
+install_kwin_scripts() {
+  print_info "Installing KWin scripts..."
+
+  local kwin_install_dir="$TEMP_DIR/kwin-install"
+  mkdir -p "$kwin_install_dir"
+
+  # Process KWin scripts
+  for scripts_info in "${KWIN_SCRIPTS[@]}"; do
+    local script_name
+    local script_url
+    IFS='|' read -r script_name script_url <<<"$scripts_info"
+
+    local script_dir="$kwin_install_dir/$script_name"
+
+    # Check if script is already installed
+    if kpackagetool6 --type=KWin/Script -l | grep -q "^$script_name$"; then
+      print_info "$script_name is already installed"
+
+      if confirm_continue "Reinstall/update $script_name ?"; then
+        kpackagetool6 --type=KWin/Script -u "$script_dir"
+      else
+        continue
+      fi
+
+    else
+      # Clone and install script
+      print_info "Installing $script_name"
+
+      if [[ -d "$script_dir" ]]; then
+        git -C "$script_dir" pull
+      else
+        git clone "$script_url" "$script_dir"
+      fi
+
+      # Install using kpackagetool6
+      if kpackagetool6 --type=kWin/Script -i "$script_dir"; then
+        print_success "Installed $script_name"
+      else
+        print_error "Failed to install $script_name"
+        continue
+      fi
+    fi
+
+    #Enable KWin Scripts
+    local config_key="${script_name}Enabled"
+    kwriteconfig6 --file kwinrc --group Plugins --key "$config_key" true
+    print_info "Enabled $script_name in kwinrc"
+  done
+
+  print_success "KWin scripts installation succesful"
+}
 
 # Git Configuration function
 
@@ -306,12 +363,14 @@ main() {
   update_system
 
   print_info "Installing essential packages"
-  intall_packages "${ESSENTIAL_PACKAGES[@]}"
+  install_packages "${ESSENTIAL_PACKAGES[@]}"
 
   print_info "Installing fonts..."
-  intall_packages "${FONT_PACKAGES[@]}"
+  install_packages "${FONT_PACKAGES[@]}"
 
-  configure git
+  install_kwin_scripts
+
+  configure_git
   install_lazyvim
   setup_github_auth
   run_configuration_script
@@ -324,51 +383,11 @@ main() {
   echo "==================================="
 }
 
-# First update the system
-sudo pacman -Syu
+# Script Entry Point
 
-echo "Installing essential packages"
-# Installls
-sudo pacman -S lazygit github-cli neovim btop fastfetch eza vivaldi kitty fish --needed
-echo "Installing fonts"
-sudo pacman -S ttf-jetbrains-mono
+# Only run main script if exectued directly
+if [[ "{$BASH_SOURCE[0]}" == "${0}" ]]; then
+  trap 'print_info "\nSetup interrupted by user."; exit 130' INT
 
-echo "Installing Kwin Scripts (Khronkite and Remember Window Positions"
-mkdir -p /tmp/kwin-install
-
-# Install krohnkite
-echo "Installing krohnkite..."
-git clone https://github.com/esjeon/krohnkite /tmp/kwin-install/krohnkite
-kpackagetool6 --type=KWin/Script -i /tmp/kwin-install/krohnkite
-
-# Install RememberWindowPositions
-echo "Installing RememberWindowPositions..."
-git clone https://github.com/rxappdev/RememberWindowPositions /tmp/kwin-install/remember
-kpackagetool6 --type=KWin/Script -i /tmp/kwin-install/remember
-
-# Enable the scripts in configuration
-echo "Enabling scripts in configuration..."
-kwriteconfig6 --file kwinrc --group Plugins --key krohnkiteEnabled true
-kwriteconfig6 --file kwinrc --group Plugins --key rememberwindowpositionsEnabled true
-
-# Clean up
-rm -rf /tmp/kwin-install
-
-echo "Setting git config name and e-mail"
-#git
-git config --global user.name "Bryan Ward"
-git config --global user.email "wardbryan3@gmail.com"
-
-echo Installing LazyVim
-#LazyVim
-echo "Backing up current nvim configs"
-mv ~/.config/nvim{,.bak}
-echo "Installing LazyVim"
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-
-#github login
-gh auth login
-
-#Execute configuration imports
-exec link-configs.sh
+  main "$@"
+fi
