@@ -5,7 +5,9 @@ sudo pacman -Syu
 
 echo "Installing essential packages"
 #Installls
-sudo pacman -S lazygit github-cli neovim btop fastfetch eza vivaldi kitty fish
+sudo pacman -S lazygit github-cli neovim btop fastfetch eza vivaldi kitty fish --needed
+echo "Installing fonts"
+sudo pacman -S ttf-jetbrains-mono
 
 echo "Setting git config name and e-mail"
 #git
