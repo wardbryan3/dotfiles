@@ -43,8 +43,8 @@ if [ ! -d "$HOME/.config/fish" ]; then
   mkdir -p "$HOME/.config/fish"
 fi
 
-if ! grep -q "source $SCRIPT_DIR/dotfiles/fish/fish" "$HOME/.config/fish/config.fish" 2>/dev/null; then
-  echo "source $SCRIPT_DIR/dotfiles/fish/fish" >>"$HOME/.config/fish/config.fish"
+if ! grep -q "source $SCRIPT_DIR/fish/fish" "$HOME/.config/fish/config.fish" 2>/dev/null; then
+  echo "source $SCRIPT_DIR/fish/fish" >>"$HOME/.config/fish/config.fish"
   echo "Added Fish config source"
 fi
 
