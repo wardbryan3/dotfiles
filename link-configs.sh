@@ -62,9 +62,9 @@ link_config "$SCRIPT_DIR/kitty/kitty.conf" \
 # 3. COLOR SCHEME
 # Controls colors for windows, buttons, text, etc.
 echo "3. Color scheme..."
-check_source "$SCRIPT_DIR/Purple_White.colors" "Color Scheme" &&
-  link_config "$SCRIPT_DIR/Purple_White.colors" \
-    "$HOME/.local/share/color-schemes/Purple_White.colors" \
+check_source "$SCRIPT_DIR/PurpleWhite.colors" "Color Scheme" &&
+  link_config "$SCRIPT_DIR/PurpleWhite.colors" \
+    "$HOME/.local/share/color-schemes/PurpleWhite.colors" \
     "color scheme"
 
 # 4. KDE settings
