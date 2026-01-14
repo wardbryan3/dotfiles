@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # This Script is to be used on arch-based systems with KDE only
 # Arch Linux System setup script
@@ -34,7 +34,7 @@ readonly FONT_PACKAGES=(
 )
 
 readonly KWIN_SCRIPTS=(
-  "khronkite|https://github.com/esjeon/khronkite"
+  "krohnkite|https://github.com/esjeon/krohnkite"
   "rememberwindowpositions|https://github.com/rxappdev/RememberWindowPositions"
 )
 
@@ -179,7 +179,7 @@ install_kwin_scripts() {
       fi
 
       # Install using kpackagetool6
-      if kpackagetool6 --type=kWin/Script -i "$script_dir"; then
+      if kpackagetool6 --type=KWin/Script -i "$script_dir"; then
         print_success "Installed $script_name"
       else
         print_error "Failed to install $script_name"
@@ -223,7 +223,7 @@ configure_git() {
     read -p "Enter Git user name: " git_name
   else
     read -p "Enter Git user name [$current_name]: " git_name
-    git_name=${git_name: -current_name}
+    git_name=${git_name:-current_name}
   fi
 
   if [[ -z "$current_email" ]]; then
@@ -368,11 +368,11 @@ main() {
   print_info "Installing fonts..."
   install_packages "${FONT_PACKAGES[@]}"
 
-  install_kwin_scripts
 
   configure_git
   install_lazyvim
   setup_github_auth
+  install_kwin_scripts
   run_configuration_script
 
   # Summary
@@ -386,7 +386,7 @@ main() {
 # Script Entry Point
 
 # Only run main script if exectued directly
-if [[ "{$BASH_SOURCE[0]}" == "${0}" ]]; then
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   trap 'print_info "\nSetup interrupted by user."; exit 130' INT
 
   main "$@"

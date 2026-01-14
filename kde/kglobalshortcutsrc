@@ -1,6 +1,7 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
 switch-to-activity-562a5275-da77-4e84-8361-d627b92cfe4e=none,none,Switch to activity "Gaming"
+switch-to-activity-9f50baab-8212-4424-8c17-7d2935237ef3=none,none,Switch to activity "Default"
 switch-to-activity-db1fc6a3-0aa6-449f-8070-3be067676621=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
@@ -24,14 +25,14 @@ mic_mute=Microphone Mute\tMeta+Volume Mute,Microphone Mute\tMeta+Volume Mute,Mut
 mute=Volume Mute,Volume Mute,Mute
 
 [ksmserver]
-Halt Without Confirmation=none,none,Shut Down Without Confirmation
+Halt Without Confirmation=none,,Shut Down Without Confirmation
 Lock Session=none,Meta+L\tScreensaver,Lock Session
 Log Out=Ctrl+Alt+Del,Ctrl+Alt+Del,Show Logout Screen
-Log Out Without Confirmation=none,none,Log Out Without Confirmation
-LogOut=none,none,Log Out
-Reboot=none,none,Reboot
-Reboot Without Confirmation=none,none,Reboot Without Confirmation
-Shut Down=none,none,Shut Down
+Log Out Without Confirmation=none,,Log Out Without Confirmation
+LogOut=none,,Log Out
+Reboot=none,,Reboot
+Reboot Without Confirmation=none,,Reboot Without Confirmation
+Shut Down=none,,Shut Down
 _k_friendly_name=Session Management
 
 [kwin]
@@ -223,7 +224,7 @@ Window to Screen 4=none,,Move Window to Screen 4
 Window to Screen 5=none,,Move Window to Screen 5
 Window to Screen 6=none,,Move Window to Screen 6
 Window to Screen 7=none,,Move Window to Screen 7
-_k_friendly_name=System Settings
+_k_friendly_name=KWin
 disableInputCapture=Meta+Shift+Esc,Meta+Shift+Esc,Disable Active Input Capture
 view_actual_size=Meta+0,Meta+0,Zoom to Actual Size
 view_zoom_in=Meta++\tMeta+=,Meta++\tMeta+=,Zoom In
@@ -231,11 +232,11 @@ view_zoom_out=Meta+-,Meta+-,Zoom Out
 
 [mediacontrol]
 _k_friendly_name=Media Controller
-mediavolumedown=none,none,Media volume down
-mediavolumeup=none,none,Media volume up
+mediavolumedown=none,,Media volume down
+mediavolumeup=none,,Media volume up
 nextmedia=Media Next,Media Next,Media playback next
 pausemedia=Media Pause,Media Pause,Pause media playback
-playmedia=none,none,Play media playback
+playmedia=none,,Play media playback
 playpausemedia=Media Play,Media Play,Play/Pause media playback
 previousmedia=Media Previous,Media Previous,Media playback previous
 stopmedia=Media Stop,Media Stop,Stop media playback
